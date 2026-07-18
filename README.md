@@ -1,7 +1,6 @@
 # ESP32 OLED PC Monitor 🖥️🔋
 
 ![ESP32 OLED PC Monitor Preview 1](images/preview.jpg)
-![ESP32 OLED PC Monitor Preview 2](images/preview2.jpg)
 
 This project displays real-time statistics of your Windows PC's **CPU, RAM, GPU (NVIDIA), and VRAM** on an SSD1306 OLED screen (128x64, I2C) connected to an **ESP32-C3** microcontroller via USB (no WiFi required).
 

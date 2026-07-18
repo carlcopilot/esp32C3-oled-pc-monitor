@@ -1,5 +1,10 @@
 # ESP32 OLED PC Monitor 🖥️🔋
 
+<p align="center">
+  <img src="images/preview.jpg" width="48%" alt="ESP32 OLED PC Monitor Preview 1" />
+  <img src="images/preview2.jpg" width="48%" alt="ESP32 OLED PC Monitor Preview 2" />
+</p>
+
 This project displays real-time statistics of your Windows PC's **CPU, RAM, GPU (NVIDIA), and VRAM** on an SSD1306 OLED screen (128x64, I2C) connected to an **ESP32-C3** microcontroller via USB (no WiFi required).
 
 For the Spanish version of this guide, please check [README_ES.md](README_ES.md).
@@ -76,4 +81,13 @@ If you want the PC Monitor script to run automatically in the background every t
 1. Double-click the file `register_startup.bat` (if it fails, right-click and choose **Run as administrator**).
 2. This creates a task in the **Windows Task Scheduler** that runs `pc_monitor_serial.py` silently in the background using `pythonw.exe` (no black terminal window will pop up).
 3. If you ever want to stop it from running on boot, double-click `unregister_startup.bat`.
+
+---
+
+## 📐 3D Printed Case Attribution
+The 3D printable case used in this project is a remix of the model:
+- **ZMK Nice Nano 128x64 OLED Dongle** by James
+- Source Link: [Printables Model 1443110](https://www.printables.com/model/1443110-zmk-nice-nano-128x64-oled-dongle-xiao-ble-remix)
+- License: [Creative Commons Attribution (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
+
 

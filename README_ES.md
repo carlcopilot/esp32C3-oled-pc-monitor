@@ -1,5 +1,10 @@
 # ESP32 OLED PC Monitor 🖥️🔋
 
+<p align="center">
+  <img src="images/preview.jpg" width="48%" alt="Vista previa del monitor OLED 1" />
+  <img src="images/preview2.jpg" width="48%" alt="Vista previa del monitor OLED 2" />
+</p>
+
 Este proyecto permite mostrar estadísticas en tiempo real del uso de **CPU, RAM, GPU (NVIDIA) y VRAM** de un PC con Windows en una pantalla OLED SSD1306 (128x64, I2C) controlada por un microcontrolador **ESP32-C3** conectado a través de USB (sin depender de WiFi).
 
 Para la versión en inglés, consulta el archivo [README.md](README.md).
@@ -76,4 +81,13 @@ Si quieres que el script se ejecute automáticamente en segundo plano cada vez q
 1. Haz doble clic en el archivo **`register_startup.bat`** (si falla, haz clic derecho y selecciona **Ejecutar como administrador**).
 2. Esto creará una tarea programada en Windows que ejecuta `pc_monitor_serial.py` en segundo plano usando `pythonw.exe` (de esta forma corre de manera invisible sin abrir ninguna ventana de terminal negra).
 3. Si en algún momento deseas desactivar el inicio automático, haz doble clic en **`unregister_startup.bat`**.
+
+---
+
+## 📐 Atribución de la Carcasa Impresa en 3D
+La carcasa impresa en 3D utilizada para este proyecto es un remix del modelo:
+- **ZMK Nice Nano 128x64 OLED Dongle** por James
+- Enlace original: [Modelo en Printables 1443110](https://www.printables.com/model/1443110-zmk-nice-nano-128x64-oled-dongle-xiao-ble-remix)
+- Licencia: [Creative Commons Attribution (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
+
 

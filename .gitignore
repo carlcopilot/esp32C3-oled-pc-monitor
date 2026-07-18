@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+.env
+
+# Arduino/Embedded
+build/
+*.pyg
+*.elf
+*.hex
+*.bin
+
+# Operating System
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Code Editor configs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.arduinoIDE/

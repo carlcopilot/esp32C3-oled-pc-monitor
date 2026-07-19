@@ -1,6 +1,7 @@
 # ESP32 OLED PC Monitor 🖥️🔋
 
 ![ESP32 OLED PC Monitor Preview 1](images/preview.jpg)
+![ESP32 OLED PC Monitor Preview 2](images/preview2.jpg)
 
 This project displays real-time statistics of your Windows PC's **CPU, RAM, GPU (NVIDIA), and VRAM** on an SSD1306 OLED screen (128x64, I2C) connected to an **ESP32-C3** microcontroller via USB (no WiFi required).
 
@@ -13,6 +14,10 @@ For the Spanish version of this guide, please check [README_ES.md](README_ES.md)
   - GPU usage (%)
   - GPU Temperature (°C)
   - VRAM usage (GB used / GB total)
+- **OLED Protection**:
+  - Automatic screen-off after 30 seconds without data to prevent OLED burn-in.
+  - Screen turns back on instantly when data is received again.
+  - Configurable timeout via the `SCREEN_OFF_MS` constant in the sketch.
 - **Robustness**:
   - Automatic reconnection logic in Python if the USB cable is disconnected.
   - Enhanced USB CDC boot timing handling for ESP32-C3 boards.
@@ -69,6 +74,8 @@ Ensure you have Python installed on your Windows PC.
    ```
 
 The script will automatically detect your NVIDIA GPU and start pushing metrics every 2 seconds. The OLED screen will immediately update with the real-time PC data.
+
+> 💡 **Note**: If the Python script is not running (or stops sending data), the OLED display will automatically turn off after 30 seconds to prevent burn-in. It turns back on as soon as data is received again. You can adjust the timeout by changing the `SCREEN_OFF_MS` value in `esp32_oled_pc_monitor.ino`.
 
 ---
 

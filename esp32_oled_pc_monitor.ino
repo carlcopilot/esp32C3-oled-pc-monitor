@@ -34,7 +34,10 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 float cpu = 0, ram = 0, gpu = 0, gpuTemp = 0;
 float ramGb = 0, vramGb = 0, vramTotGb = 0;
 unsigned long lastDataMillis = 0;
-const unsigned long TIMEOUT_MS = 5000; // si no llegan datos en 5s, avisa "sin datos"
+unsigned long bootMillis = 0;                // momento del arranque
+const unsigned long TIMEOUT_MS = 5000;       // si no llegan datos en 5s, avisa "sin datos"
+const unsigned long SCREEN_OFF_MS = 30000;   // si no llegan datos en 30s, apaga la pantalla
+bool displayOn = true;                       // estado actual de la pantalla OLED
 
 String inputBuffer = "";
 
@@ -136,6 +139,7 @@ void setup() {
   display.setCursor(0, 24);
   display.println("pc_monitor_serial.py");
   display.display();
+  bootMillis = millis();
   Serial.println("[INIT] Setup completado. Esperando datos JSON por Serial...");
 }
 
@@ -151,13 +155,28 @@ void loop() {
     }
   }
 
-  // Si llevamos demasiado tiempo sin datos, mostrar aviso
-  if (millis() - lastDataMillis > TIMEOUT_MS && lastDataMillis != 0) {
+  // Si llevamos demasiado tiempo sin datos, mostrar aviso o apagar pantalla
+  // Usar lastDataMillis si ya se recibio algun dato, si no usar bootMillis
+  unsigned long referencia = (lastDataMillis != 0) ? lastDataMillis : bootMillis;
+  unsigned long sinDatos = millis() - referencia;
+
+  if (sinDatos > SCREEN_OFF_MS) {
+    // Apagar la pantalla para evitar burn-in del OLED
+    if (displayOn) {
+      display.ssd1306_command(SSD1306_DISPLAYOFF);
+      displayOn = false;
+      Serial.println("[OLED] Pantalla apagada (sin datos durante 30s)");
+    }
+  } else if (sinDatos > TIMEOUT_MS) {
+    // Mostrar aviso pero con pantalla encendida
     display.clearDisplay();
     display.setCursor(0, 0);
     display.setTextSize(1);
-    display.println("Sin conexion");
-    display.println("con el PC...");
+    display.println("Sin conexion, inicia");
+    display.println("el programa.");
+    display.println("");
+    display.println("Se apagara la");
+    display.println("pantalla en 30 seg.");
     display.display();
   }
 }
@@ -180,6 +199,13 @@ void parseAndShow(const String &jsonLine) {
   vramGb = doc["vram_gb"] | 0.0;
   vramTotGb = doc["vram_tot"] | 0.0;
   lastDataMillis = millis();
+
+  // Reencender pantalla si estaba apagada
+  if (!displayOn) {
+    display.ssd1306_command(SSD1306_DISPLAYON);
+    displayOn = true;
+    Serial.println("[OLED] Pantalla encendida (datos recibidos)");
+  }
 
   drawScreen();
 }

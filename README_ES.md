@@ -14,6 +14,10 @@ Para la versión en inglés, consulta el archivo [README.md](README.md).
   - Uso de GPU (%)
   - Temperatura de GPU (°C)
   - Uso de VRAM (GB usados / GB totales)
+- **Protección OLED**:
+  - Apagado automático de la pantalla tras 30 segundos sin recibir datos para evitar burn-in.
+  - La pantalla se enciende instantáneamente al volver a recibir datos.
+  - Tiempo configurable mediante la constante `SCREEN_OFF_MS` en el sketch.
 - **Robustez**:
   - Auto-reconexión del script Python si el cable USB se desconecta.
   - Gestión mejorada del inicio del puerto serie (USB CDC) en placas ESP32-C3.
@@ -70,6 +74,8 @@ Necesitas tener Python instalado en tu ordenador.
    ```
 
 El script detectará automáticamente tu tarjeta gráfica NVIDIA e iniciará la transmisión de datos cada 2 segundos. La pantalla OLED mostrará la información en tiempo real de inmediato.
+
+> 💡 **Nota**: Si el script Python no está en ejecución (o deja de enviar datos), la pantalla OLED se apagará automáticamente a los 30 segundos para evitar el burn-in. Se enciende de nuevo en cuanto recibe datos. Puedes ajustar el tiempo modificando el valor de `SCREEN_OFF_MS` en `esp32_oled_pc_monitor.ino`.
 
 ---
 
